@@ -1,18 +1,14 @@
 package com.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.EqualsAndHashCode;
-
 import java.io.Serializable;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Document(collection = "pizzas")
 @EqualsAndHashCode
 public class Pizza implements Serializable{
 
@@ -21,5 +17,28 @@ public class Pizza implements Serializable{
 	private String id;
 	private String nome;
 	private String description;
+	
+	public Pizza() {
+		super();
+	}
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 }

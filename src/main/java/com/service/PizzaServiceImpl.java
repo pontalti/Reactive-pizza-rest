@@ -17,28 +17,28 @@ public class PizzaServiceImpl implements PizzaService, Serializable{
 
 	private PizzaRepository repository;
 	
-	public PizzaServiceImpl(PizzaRepository pizzaRepository) {
-		this.repository = pizzaRepository;
+	public PizzaServiceImpl(PizzaRepository repository) {
+		this.repository = repository;
 	}
 
 	@Override
 	public Mono<Pizza> findById(String id) {
-		return repository.findById(id);
+		return this.repository.findById(id);
 	}
 
 	@Override
 	public Flux<Pizza> findAll() {
-		return repository.findAll();
+		return this.repository.findAll();
 	}
 
 	@Override
 	public Mono<Pizza> save(Pizza pizza) {
-		return repository.save(pizza);
+		return this.repository.save(pizza);
 	}
 
 	@Override
 	public Mono<Void> deleteById(String id) {
-		return repository.deleteById(id);
+		return this.repository.deleteById(id);
 	}
 
 }
