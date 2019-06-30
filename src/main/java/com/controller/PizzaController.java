@@ -1,40 +1,34 @@
 package com.controller;
 
-import org.springframework.web.bind.annotation.RestController;
-
-import com.model.Pizza;
-import com.service.PizzaService;
-
 import java.io.Serializable;
 
-import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.thymeleaf.spring5.context.webflux.IReactiveDataDriverContextVariable;
+import org.thymeleaf.spring5.context.webflux.ReactiveDataDriverContextVariable;
 
-@RestController
-public class PizzaController implements Serializable{
+import com.service.PizzaService;
+
+@Controller
+public class PizzaController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Autowired
 	private PizzaService service;
 
-	public PizzaController(PizzaService service) {
-		this.service = service;
+	public PizzaController() {
+		super();
 	}
 
-	@GetMapping(value = "/Pizza/{id}")
-	public Mono<Pizza> getPizzaById(@PathVariable String id) {
-		return service.findById(id);
-	}
+	@RequestMapping("/")
+	public String index(final Model model) {
+		IReactiveDataDriverContextVariable reactive = new ReactiveDataDriverContextVariable(service.findAll(), 1);
+		model.addAttribute("pizzas", reactive);
+		return "index";
 
-	@GetMapping(value = "/Pizzas")
-	public Flux<Pizza> getAllPizzas() {
-		return service.findAll();
-	}
-
-	@PostMapping(value = "/Pizza")
-	public Mono<Pizza> createPizza(@RequestBody Pizza Pizza) {
-		return service.save(Pizza);
 	}
 
 }

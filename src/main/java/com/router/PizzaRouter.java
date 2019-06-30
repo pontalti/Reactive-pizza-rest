@@ -24,10 +24,10 @@ public class PizzaRouter implements Serializable{
 
 	@Bean
 	public RouterFunction<ServerResponse> route(PizzaHandler handler) {
-		return RouterFunctions.route(GET("/fpizzas").and(accept(MediaType.APPLICATION_JSON)), handler::findAll)
-				.andRoute(GET("/fpizza/{id}").and(accept(MediaType.APPLICATION_STREAM_JSON)), handler::findById)
-				.andRoute(POST("/fpizza").and(accept(MediaType.APPLICATION_JSON)), handler::save)
-				.andRoute(DELETE("/fpizza/{id}").and(accept(MediaType.APPLICATION_JSON)), handler::delete);
+		return RouterFunctions.route(GET("/pizzas").and(accept(MediaType.APPLICATION_JSON)), handler::findAll)
+				.andRoute(GET("/pizza/{id}").and(accept(MediaType.APPLICATION_STREAM_JSON)), handler::findById)
+				.andRoute(POST("/pizza").and(accept(MediaType.APPLICATION_JSON)), handler::save)
+				.andRoute(DELETE("/pizza/{id}").and(accept(MediaType.APPLICATION_JSON)), handler::delete);
 	}
 
 }

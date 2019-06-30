@@ -1,6 +1,7 @@
 package com.service;
 
 import java.io.Serializable;
+import java.time.Duration;
 
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class PizzaServiceImpl implements PizzaService, Serializable{
 
 	@Override
 	public Flux<Pizza> findAll() {
-		return this.repository.findAll();
+		return this.repository.findAll().delayElements(Duration.ofSeconds(2));
 	}
 
 	@Override
